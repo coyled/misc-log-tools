@@ -29,18 +29,16 @@ ARGF.each_line do |line|
     method, request_path, protocol = line['%r'].split(/ /, 3)
 
     json = {
-                :log => {
-                    :source_ip      => line['%h'],
-                    :auth           => line['%u'],
-                    :timestamp      => timestamp,
-                    :method         => method,
-                    :request_path   => request_path,
-                    :protocol       => protocol,
-                    :status         => line['%>s'],
-                    :bytes          => line['%b'],
-                    :referrer       => line['%{Referer}i'],
-                    :user_agent     => line['%{User-Agent}i']
-                }
+                :source_ip      => line['%h'],
+                :auth           => line['%u'],
+                :timestamp      => timestamp,
+                :method         => method,
+                :request_path   => request_path,
+                :protocol       => protocol,
+                :status         => line['%>s'],
+                :bytes          => line['%b'],
+                :referrer       => line['%{Referer}i'],
+                :user_agent     => line['%{User-Agent}i']
            }
 
     puts JSON.generate(json)
