@@ -21,8 +21,11 @@ ARGF.each_line do |line|
     parser = ApacheLogRegex.new(format)
     line = parser.parse(line)
 
+    # convert '[21/Apr/2011:12:33:37 -0400]' to epoch seconds...
     timestamp = line['%t'].gsub(/[\[\]]/, '')
     timestamp = DateTime.parse(timestamp).strftime('%s')
+
+    # split 'GET /index.html HTTP/1.0'...
     method, request_path, protocol = line['%r'].split(/ /, 3)
 
     json = {
